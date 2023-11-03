@@ -1,0 +1,28 @@
+{
+  "name": "changa-connect-node-ts",
+  "version": "1.0.0",
+  "description": "A crowd funding platform (back end server)",
+  "main": "index.ts",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dennis7456/changa-connect-node-ts.git"
+  },
+  "keywords": [
+    "nodejs",
+    "typescript",
+    "fastify",
+    "graphqljs",
+    "graphql-helix",
+    "prisma",
+    "graphiql"
+  ],
+  "author": "Dennis Ngetich Kiplangat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dennis7456/changa-connect-node-ts/issues"
+  },
+  "homepage": "https://github.com/Dennis7456/changa-connect-node-ts#readme"
+}
