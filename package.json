@@ -4,7 +4,9 @@
   "description": "A crowd funding platform (back end server)",
   "main": "index.ts",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "dev": "ts-node-dev --exit-child app/index.ts",
+    "start": "ts-node app/index.ts"
   },
   "repository": {
     "type": "git",
