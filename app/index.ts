@@ -10,6 +10,7 @@ import {
 } from 'graphql-helix';
 import { execute, parse } from 'graphql';
 import { schema } from './schema';
+import { contextFactory } from './context';
 
 async function app() {
   const server = fastify();
@@ -42,6 +43,7 @@ async function app() {
         request,
         schema,
         operationName,
+        contextFactory: () => contextFactory(req),
         query,
         variables,
       });
