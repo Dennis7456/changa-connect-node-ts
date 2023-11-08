@@ -1,12 +1,10 @@
 {
   "name": "changa-connect-node-ts",
   "version": "1.0.0",
-  "description": "A crowd funding platform (backend server)",
+  "description": "A crowd funding platform (back end server)",
   "main": "index.ts",
   "scripts": {
-    "test": "npm test",
-    "dev": "ts-node-dev --exit-child app/index.ts",
-    "start": "ts-node app/index.ts"
+    "test": "npm test"
   },
   "repository": {
     "type": "git",
@@ -26,18 +24,5 @@
   "bugs": {
     "url": "https://github.com/Dennis7456/changa-connect-node-ts/issues"
   },
-  "homepage": "https://github.com/Dennis7456/changa-connect-node-ts#readme",
-  "devDependencies": {
-    "@types/node": "^20.9.0",
-    "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "@graphql-tools/schema": "^10.0.0",
-    "fastify": "^4.24.3",
-    "graphql": "^16.8.1",
-    "graphql-helix": "^1.13.0",
-    "graphql-import-node": "^0.0.5"
-  }
+  "homepage": "https://github.com/Dennis7456/changa-connect-node-ts#readme"
 }
