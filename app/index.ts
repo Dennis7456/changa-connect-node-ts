@@ -1,5 +1,6 @@
 import 'graphql-import-node';
 import fastify from 'fastify';
+import cors from '@fastify/cors'
 import {
   getGraphQLParameters,
   processRequest,
@@ -7,16 +8,26 @@ import {
   Request,
   sendResult,
   shouldRenderGraphiQL,
+  sendResponseResult
 } from 'graphql-helix';
-import { execute, parse } from 'graphql';
 import { schema } from './schema';
 import { contextFactory } from './context';
 
 async function app() {
-  const server = fastify();
-  const port = 3001;
+  const server = fastify({ logger: true });
+
+  server.register(cors, {
+    
+    origin:['http://localhost:3000'],
+    methods: ['OPTIONS'],
+    credentials: true,
+    strictPreflight: false,
+    //allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
+  })
+ 
+  const port = 4000;
+  
   server.route({
-    // method: ['POST', 'GET'],
     method: ['POST', 'GET'],
     url: '/graphql',
     handler: async (req, resp) => {
@@ -26,6 +37,8 @@ async function app() {
         query: req.query,
         body: req.body,
       };
+      //console.log('Headers', request.headers);
+      resp.header('Access-Control-Allow-Origin', 'http://localhost:3000');
 
       if (shouldRenderGraphiQL(request)) {
         resp.header('Content-Type', 'text/html');
@@ -39,6 +52,8 @@ async function app() {
       }
       const { operationName, query, variables } = getGraphQLParameters(request);
 
+      //console.log(variables);
+
       const result = await processRequest({
         request,
         schema,
@@ -46,9 +61,24 @@ async function app() {
         contextFactory: () => contextFactory(req),
         query,
         variables,
+
       });
 
-      sendResult(result, resp.raw);
+
+      if (result.type === "RESPONSE") {
+        result.headers.forEach(({ name, value }) => {
+          resp.header(name, value)
+          
+        });
+        resp.status(result.status);
+        //console.log(result.payload.data);
+        resp.serialize(result.payload);
+        resp.send(result.payload);
+
+  } else {
+     sendResult(result, resp.raw);
+  }
+
     },
   });
 
