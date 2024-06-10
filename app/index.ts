@@ -12,15 +12,15 @@ import {
 } from 'graphql-helix';
 import { schema } from './schema';
 import { contextFactory } from './context';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+// import { SpeedInsights } from "@vercel/speed-insights/next"
 
 async function app() {
   const server = fastify({ logger: true });
 
   server.register(cors, {
 
-    // origin: ['http://localhost:3000'],
-    origin: ['https://changa-connect-react-ts.vercel.app/'],
+    origin: ['http://localhost:3000'],
+    // origin: ['https://changa-connect-react-ts.vercel.app/'],
     methods: ['OPTIONS'],
     credentials: true,
     strictPreflight: false,
@@ -40,7 +40,7 @@ async function app() {
         body: req.body,
       };
       //console.log('Headers', request.headers);
-      resp.header('Access-Control-Allow-Origin', 'https://changa-connect-react-ts.vercel.app/');
+      resp.header('Access-Control-Allow-Origin', 'http://localhost:3000');
 
       if (shouldRenderGraphiQL(request)) {
         resp.header('Content-Type', 'text/html');
