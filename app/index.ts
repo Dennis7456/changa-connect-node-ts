@@ -82,6 +82,22 @@ async function app() {
     },
   });
 
+  server.route({
+    method: ['POST', 'GET'],
+    url: '/',
+    handler: async (req, resp) => {
+        try {
+            // Your logic here
+            // For example, you can send a response with a status code and a message
+            resp.status(200).send("Server is running!");
+        } catch (error) {
+            // Handle errors appropriately
+            console.error("Error:", error);
+            resp.status(500).send("Internal Server Error");
+        }
+    }
+})
+
   server.listen({ port: port }, (err, address) => {
     if (err) {
       console.error(err);
