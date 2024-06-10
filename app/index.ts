@@ -12,21 +12,22 @@ import {
 } from 'graphql-helix';
 import { schema } from './schema';
 import { contextFactory } from './context';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 async function app() {
   const server = fastify({ logger: true });
 
   server.register(cors, {
-    
-    origin:['http://localhost:3000'],
+
+    origin: ['http://localhost:3000'],
     methods: ['OPTIONS'],
     credentials: true,
     strictPreflight: false,
     //allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
   })
- 
+
   const port = 4000;
-  
+
   server.route({
     method: ['POST', 'GET'],
     url: '/graphql',
@@ -68,16 +69,16 @@ async function app() {
       if (result.type === "RESPONSE") {
         result.headers.forEach(({ name, value }) => {
           resp.header(name, value)
-          
+
         });
         resp.status(result.status);
         //console.log(result.payload.data);
         resp.serialize(result.payload);
         resp.send(result.payload);
 
-  } else {
-     sendResult(result, resp.raw);
-  }
+      } else {
+        sendResult(result, resp.raw);
+      }
 
     },
   });
@@ -86,17 +87,17 @@ async function app() {
     method: ['POST', 'GET'],
     url: '/',
     handler: async (req, resp) => {
-        try {
-            // Your logic here
-            // For example, you can send a response with a status code and a message
-            resp.status(200).send("Server is running!");
-        } catch (error) {
-            // Handle errors appropriately
-            console.error("Error:", error);
-            resp.status(500).send("Internal Server Error");
-        }
+      try {
+        // Your logic here
+        // For example, you can send a response with a status code and a message
+        resp.status(200).send("Server is running!");
+      } catch (error) {
+        // Handle errors appropriately
+        console.error("Error:", error);
+        resp.status(500).send("Internal Server Error");
+      }
     }
-})
+  })
 
   server.listen({ port: port }, (err, address) => {
     if (err) {

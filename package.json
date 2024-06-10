@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm test",
     "dev": "ts-node-dev --exit-child app/index.ts",
-    "start": "ts-node app/index.ts"
+    "start": "ts-node app/index.ts",
+    "postinstall": "prisma generate"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,10 @@
   "dependencies": {
     "@fastify/cors": "^8.4.1",
     "@graphql-tools/schema": "^10.0.0",
+    "@neondatabase/serverless": "^0.9.3",
+    "@prisma/adapter-neon": "^5.15.0",
+    "@vercel/postgres": "^0.8.0",
+    "@vercel/speed-insights": "^1.0.11",
     "bcryptjs": "^2.4.3",
     "fastify": "^4.24.3",
     "fastify-cors": "^6.1.0",
