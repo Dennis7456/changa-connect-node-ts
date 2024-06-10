@@ -19,7 +19,8 @@ async function app() {
 
   server.register(cors, {
 
-    origin: ['http://localhost:3000'],
+    // origin: ['http://localhost:3000'],
+    origin: ['https://changa-connect-react-ts.vercel.app/'],
     methods: ['OPTIONS'],
     credentials: true,
     strictPreflight: false,
@@ -39,7 +40,7 @@ async function app() {
         body: req.body,
       };
       //console.log('Headers', request.headers);
-      resp.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+      resp.header('Access-Control-Allow-Origin', 'https://changa-connect-react-ts.vercel.app/');
 
       if (shouldRenderGraphiQL(request)) {
         resp.header('Content-Type', 'text/html');
